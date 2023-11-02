@@ -7,6 +7,7 @@ import { Button, Text, TextInput } from 'react-native-paper'
 import disciplinaValidator from '../../validators/disciplinaValidator'
 import { mask } from 'remask'
 import { Picker } from '@react-native-picker/picker'
+import Validacao from '../../components/Validacao'
 
 const DisciplinasForm = ({ navigation, route }) => {
 
@@ -69,11 +70,7 @@ const DisciplinasForm = ({ navigation, route }) => {
               value={values.nome}
               onChangeText={handleChange('nome')}
             />
-            {(errors.nome && touched.nome) &&
-              <Text style={{ color: 'red', marginTop: 5 }}>
-                {errors.nome}
-              </Text>
-            }
+            <Validacao errors={errors.nome} touched={touched.nome} />
 
             <Picker
               selectedValue={values.curso_id}
@@ -86,11 +83,7 @@ const DisciplinasForm = ({ navigation, route }) => {
                 />
               ))}
             </Picker>
-            {(errors.curso_id && touched.curso_id) &&
-              <Text style={{ color: 'red', marginTop: 5 }}>
-                {errors.curso_id}
-              </Text>
-            }
+            <Validacao errors={errors.curso_id} touched={touched.curso_id} />
 
             <Button onPress={handleSubmit}>Salvar</Button>
           </View>
