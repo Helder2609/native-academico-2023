@@ -5,6 +5,12 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import CursoStack from './screens/cursos/CursoStack';
 import AlunosStack from './screens/alunos/AlunosStack';
 import DisciplinaStack from './screens/disciplinas/DisciplinasStack';
+import Carrinho from './screens/carrinho/Carrinho';
+import Mesas from './screens/mesas/Mesas';
+import Reserva from './screens/reserva/Reserva';
+import ReservaStack from './screens/reserva/ReservaStack';
+import PedidoStack from './screens/entrega/PedidoStack';
+import Icon from 'react-native-vector-icons/AntDesign'
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -15,47 +21,50 @@ export default function App() {
         <NavigationContainer>
           <Tab.Navigator initialRouteName='Disciplinas'>
             <Tab.Screen
-              name="Cursos" 
+              name="Produtos" 
               component={CursoStack}
               options={{
                 tabBarIcon: () => (
-                  <MaterialCommunityIcons name="bookshelf" size={26} />
+
+                  <Icon name="inbox" size={26}/>
                 ),
               }}
             />
             <Tab.Screen
-              name="Disciplinas" 
+              name="Menu" 
               component={DisciplinaStack}
               options={{
                 tabBarIcon: () => (
-                  <MaterialCommunityIcons name="book-open-variant" size={26} />
+                 
+                  <MaterialCommunityIcons name="menu" size={26} />
                 ),
               }}
             />
             <Tab.Screen
-              name="Alunos" 
-              component={AlunosStack}
+              name="Mesas" 
+              component={Mesas}
               options={{
                 tabBarIcon: () => (
-                  <MaterialCommunityIcons name="human-handsup" size={26} />
+                  <Icon name="inbox" size={26}/>
                 ),
               }}
             />
             <Tab.Screen
-              name="Professores" 
-              component={CursoStack}
+              name="Reserva" 
+              component={ReservaStack}
               options={{
                 tabBarIcon: () => (
-                  <MaterialCommunityIcons name="account-tie" size={26} />
-                ),
-              }}
+                  <MaterialCommunityIcons name="table-large" size={26} />
+                  ),
+                }}
             />
             <Tab.Screen
-              name="Turmas" 
-              component={CursoStack}
+              name="Pedidos" 
+              component={PedidoStack}
               options={{
                 tabBarIcon: () => (
-                  <MaterialCommunityIcons name="google-classroom" size={26} />
+                  <MaterialCommunityIcons name="reorder-horizontal" size={26} />
+                  
                 ),
               }}
             />

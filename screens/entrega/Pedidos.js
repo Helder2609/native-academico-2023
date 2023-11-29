@@ -4,9 +4,9 @@ import React, { useEffect, useState } from 'react'
 import { ScrollView, View } from 'react-native'
 import { Button, Card, Dialog, FAB, IconButton, MD3DarkTheme, Portal, Text } from 'react-native-paper'
 
-const Cursos = ({ navigation }) => {
+const Pedidos = ({ navigation }) => {
 
-  const [cursos, setCursos] = useState([])
+  const [pedidos, setPedidos] = useState([])
   const [idExcluir, setIdExcluir] = useState(0)
 
   const [visible, setVisible] = React.useState(false);
@@ -20,9 +20,9 @@ const Cursos = ({ navigation }) => {
   );
 
   function carregarDados() {
-    AsyncStorage.getItem('cursos').then(resultado => {
+    AsyncStorage.getItem('pedidos').then(resultado => {
       resultado = JSON.parse(resultado) || []
-      setCursos(resultado)
+      setPedidos(resultado)
     })
   }
 
@@ -32,8 +32,8 @@ const Cursos = ({ navigation }) => {
   }
 
   function excluir() {
-    cursos.splice(idExcluir, 1)
-    AsyncStorage.setItem('cursos', JSON.stringify(cursos))
+    pedidos.splice(idExcluir, 1)
+    AsyncStorage.setItem('pedidos', JSON.stringify(pedidos))
     carregarDados()
     setVisible(false)
   }
@@ -43,18 +43,15 @@ const Cursos = ({ navigation }) => {
 
       <ScrollView style={{ padding: 15 }}>
 
-        {cursos.map((item, i) => (
+        {pedidos.map((item, i) => (
           <Card key={i} mode='outlined' style={{ marginBottom: 10 }}>
             <Card.Content>
               <Text variant="titleLarge">{item.nome}</Text>
-              <Card.Content>
-                <Text variant="bodyMedium">Categorias: {item?.categorias}</Text>
-              </Card.Content>
             </Card.Content>
             <Card.Actions>
               <IconButton
                 icon='pencil-outline'
-                onPress={() => navigation.push('cursos-form', { id: i, curso: item })}
+                onPress={() => navigation.push('pedidos-form', { id: i, disciplina: item })}
               />
               <IconButton
                 icon='trash-can-outline'
@@ -82,11 +79,11 @@ const Cursos = ({ navigation }) => {
         icon="plus"
         size='small'
         style={{ position: 'absolute', right: 10, bottom: 10 }}
-        onPress={() => navigation.push('cursos-form')}
+        onPress={() => navigation.push('pedidos-form')}
       />
 
     </>
   )
 }
 
-export default Cursos
+export default Pedidos

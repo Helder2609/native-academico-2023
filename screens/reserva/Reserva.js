@@ -4,9 +4,9 @@ import React, { useEffect, useState } from 'react'
 import { ScrollView, View } from 'react-native'
 import { Button, Card, Dialog, FAB, IconButton, MD3DarkTheme, Portal, Text } from 'react-native-paper'
 
-const Cursos = ({ navigation }) => {
+const Reserva = ({ navigation }) => {
 
-  const [cursos, setCursos] = useState([])
+  const [reserva, setReserva] = useState([])
   const [idExcluir, setIdExcluir] = useState(0)
 
   const [visible, setVisible] = React.useState(false);
@@ -20,9 +20,9 @@ const Cursos = ({ navigation }) => {
   );
 
   function carregarDados() {
-    AsyncStorage.getItem('cursos').then(resultado => {
+    AsyncStorage.getItem('reserva').then(resultado => {
       resultado = JSON.parse(resultado) || []
-      setCursos(resultado)
+      setReserva(resultado)
     })
   }
 
@@ -32,8 +32,8 @@ const Cursos = ({ navigation }) => {
   }
 
   function excluir() {
-    cursos.splice(idExcluir, 1)
-    AsyncStorage.setItem('cursos', JSON.stringify(cursos))
+    reserva.splice(idExcluir, 1)
+    AsyncStorage.setItem('reserva', JSON.stringify(reserva))
     carregarDados()
     setVisible(false)
   }
@@ -43,18 +43,18 @@ const Cursos = ({ navigation }) => {
 
       <ScrollView style={{ padding: 15 }}>
 
-        {cursos.map((item, i) => (
+        {reserva.map((item, i) => (
           <Card key={i} mode='outlined' style={{ marginBottom: 10 }}>
             <Card.Content>
               <Text variant="titleLarge">{item.nome}</Text>
-              <Card.Content>
-                <Text variant="bodyMedium">Categorias: {item?.categorias}</Text>
-              </Card.Content>
+              <Text variant="bodyMedium">Número: {item.numero} </Text>
+              <Text variant="bodyMedium">CPF: {item.cpf}</Text>
+              <Text variant="bodyMedium">Pessoas: {item.pessoas}</Text>
             </Card.Content>
             <Card.Actions>
-              <IconButton
-                icon='pencil-outline'
-                onPress={() => navigation.push('cursos-form', { id: i, curso: item })}
+              <IconButton 
+                icon='pencil-outline' 
+                onPress={() => navigation.push('reserva-form', {id: i, curso: item})}
               />
               <IconButton
                 icon='trash-can-outline'
@@ -82,11 +82,11 @@ const Cursos = ({ navigation }) => {
         icon="plus"
         size='small'
         style={{ position: 'absolute', right: 10, bottom: 10 }}
-        onPress={() => navigation.push('cursos-form')}
+        onPress={() => navigation.push('reserva-form')}
       />
 
     </>
   )
 }
 
-export default Cursos
+export default Reserva

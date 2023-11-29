@@ -6,7 +6,7 @@ const cursoValidator = Yup.object().shape({
         .max(10, 'Valor muito grande')
         .required('Campo obrigatório'),
 
-    duracao: Yup.number(),
+    duracao: Yup.number('alerta: somente nùmeros'),
     modalidade: Yup.string(),
 })
 
