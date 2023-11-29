@@ -1,10 +1,12 @@
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import axios from 'axios'
 import { Formik } from 'formik'
 import React, { useState } from 'react'
 import { ScrollView } from 'react-native'
 import { Button, Text, TextInput } from 'react-native-paper'
 
-const AlunosForm = () => {
+
+const AlunosForm = ({navigation}) => {
 
     const [dados, setDados] = useState({})
 
@@ -26,11 +28,26 @@ const AlunosForm = () => {
     }
 
     function salvar() {
-        console.log(dados)
+        AsyncStorage.getItem('alunos').then(resultado => {
+      
+            const alunos = JSON.parse(resultado) || []
+            
+            alunos.push(dados)
+            console.log(alunos)
+        
+            AsyncStorage.setItem('alunos', JSON.stringify(alunos))
+        
+            navigation.goBack()
+          })
+      
     }
 
     return (
         <ScrollView style={{ margin: 15 }}>
+<<<<<<< HEAD
+=======
+            <Text>Formulário do aluno</Text>
+>>>>>>> 47df9e2e80c63bb44ba3a0374b1e418717a5fd22
 
             <Formik
                 initialValues={curso}
